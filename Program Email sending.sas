@@ -1,3 +1,19 @@
+PROC SQL;
+   CREATE TABLE WORK.QUERY_FOR_PLAYERSESSION AS 
+   SELECT t1.PlayerID, 
+          t1.DateAdjusted, 
+          /* PointsEarned */
+            (SUM(t1.PointsEarned)) FORMAT=11. AS PointsEarned, 
+          /* TheoWin */
+            (SUM(t1.TheoWin)) FORMAT=DOLLAR23.2 AS TheoWin
+      FROM PDEALS.PLAYERSESSION t1
+      WHERE (t1.DateAdjusted BETWEEN today() -1 AND today() - 90)
+      GROUP BY t1.PlayerID,
+               t1.DateAdjusted;
+QUIT;
+
+
+
 /* ----------------------------------------
 Code exported from SAS Enterprise Guide
 DATE: Sunday, November 9, 2025     TIME: 5:16:16 PM
@@ -369,3 +385,4 @@ ods html close;
 
 ;*';*";*/;quit;run;
 ODS _ALL_ CLOSE;
+
