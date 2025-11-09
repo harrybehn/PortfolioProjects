@@ -1,0 +1,18 @@
+PROC SQL;
+   CREATE TABLE WORK.QUERY_FOR_PLAYERSESSION AS 
+   SELECT t1.PlayerID, 
+          t1.EndTime, 
+          t1.Location, 
+          t1.Win, 
+          t1.TheoWin, 
+          t1.PointsEarned, 
+          t1.DateAdjusted, 
+          t1.CoinIn, 
+          t1.TierPoints, 
+          t1.AverageBet, 
+          t1.GamingArea, 
+          t1.GamingArea2, 
+          t1.SlotETGCoinIn
+      FROM PDEALS.PLAYERSESSION t1
+      WHERE (t1.DateAdjusted >= TODAY() - 22);
+QUIT;
